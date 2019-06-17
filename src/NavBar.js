@@ -36,7 +36,7 @@ class NavBar extends Component {
         return(
             <header className='NavBar'>
                 <div className='logo'>
-                    <Link exact to='/'>Palette Colour Picker</Link>
+                    <Link to='/'>Palette Colour Picker</Link>
                 </div>
                 <div className='slider-container'>
                     <span>Level: { level }</span>
