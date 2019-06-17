@@ -2,6 +2,7 @@ import chroma from 'chroma-js';
 
 const levels = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
 
+// -------------------------------------------------------------- This function is used to generate the different shades of a colour stored on the palette ------------------------------------
 function generatePalette(starterPalette) {
     let newPalette = {
         paletteName: starterPalette.paletteName,
@@ -46,5 +47,7 @@ function generateScale(hexColor, numberOfColors) {
             .mode('lab')
             .colors(numberOfColors);
 }
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 export { generatePalette }
