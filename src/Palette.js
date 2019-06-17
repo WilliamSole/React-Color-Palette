@@ -33,7 +33,7 @@ class Palette extends Component {
                         background={ c[format] } 
                         name={ c.name } 
                         paletteId={id} 
-                        showLink={ true }
+                        showingFullPalette={ true }
                     />
         })
         return(
@@ -42,7 +42,7 @@ class Palette extends Component {
                     level={ level } 
                     changeLevel={ this.changeLevel } 
                     handleChange={ this.changeColorFormat }
-                    showingAllColors={ true }
+                    showFullPalette={ true }
                 />
                 <div className='Palette-colours'>
                     {colourBoxes}
