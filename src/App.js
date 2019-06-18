@@ -10,10 +10,24 @@ import NewPaletteForm from './NewPaletteForm';
 import seedColours from './seedColours';
 
 class App extends Component {
-  findPalette(id){
-    return seedColours.find(function(palette){
+  constructor(props) {
+    super(props);
+    this.state = {
+      palettes: seedColours
+    }
+
+    this.findPalette = this.findPalette.bind(this);
+    this.savePalette = this.savePalette.bind(this);
+  }
+
+  findPalette( id ) {
+    return this.state.palettes.find( function ( palette ) {
       return palette.id === id;
     })
+  }
+
+  savePalette( newPalette ) {
+    this.setState({ palettes: [ ...this.state.palettes, newPalette ]})
   }
 
   render() {
@@ -22,7 +36,12 @@ class App extends Component {
         <Route
           exact
           path='/palette/new'
-          render={ () => <NewPaletteForm /> } 
+          render={ routeProps => (
+            <NewPaletteForm 
+              savePalette={ this.savePalette }  
+              { ...routeProps }
+            /> 
+          )} 
         />
 
         <Route 
@@ -40,7 +59,7 @@ class App extends Component {
           exact 
           path='/' 
           render={ routeProps => (
-            <PaletteList palettes={ seedColours } { ...routeProps } /> 
+            <PaletteList palettes={ this.state.palettes } { ...routeProps } /> 
           )}
         />
 
