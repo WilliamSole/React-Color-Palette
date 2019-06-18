@@ -78,6 +78,10 @@ const styles = theme => ({
 });
 
 class NewPaletteForm extends Component {
+    static defaultProps = {
+        maxColors: 20
+    }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -85,7 +89,7 @@ class NewPaletteForm extends Component {
             currentColor: 'teal',
             newColorName: '',
             newPaletteName: '',
-            colors: []
+            colors: this.props.palettes[0].colors
         }
 
         this.handleDrawerClose = this.handleDrawerClose.bind(this);
@@ -95,6 +99,8 @@ class NewPaletteForm extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSumbit = this.handleSumbit.bind(this);
         this.removeColor = this.removeColor.bind(this);
+        this.clearColors = this.clearColors.bind(this);
+        this.addRandomColor = this.addRandomColor.bind(this);
     }
 
     componentDidMount(){
@@ -165,9 +171,23 @@ class NewPaletteForm extends Component {
         }));
     };
 
+    clearColors() {
+        this.setState({
+            colors: []
+        });
+    }
+
+    addRandomColor() {
+        const allColors = this.props.palettes.map( p => p.colors ).flat();
+        var rand = Math.floor(Math.random() * allColors.length);
+        let randomColor = allColors[rand]; 
+        this.setState({ colors: [ ...this.state.colors, randomColor ]})
+    }
+
     render() {
-        const { classes } = this.props;
-        const { open, currentColor, newColorName } = this.state;
+        const { classes, maxColors } = this.props;
+        const { open, currentColor, newColorName, colors } = this.state;
+        const paletteIsFull = colors.length >= maxColors;
 
         return (
             <div className={classes.root}>
@@ -189,7 +209,7 @@ class NewPaletteForm extends Component {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" color="inherit" noWrap>
-                            Persistent drawer
+                            Create A Palette
                         </Typography>
 
                         <ValidatorForm onSubmit={ this.handleSumbit }>
@@ -231,8 +251,23 @@ class NewPaletteForm extends Component {
                         Design Your Palette
                     </Typography>
                     <div>
-                        <Button variant='contained' color='secondary'>Clear Palette</Button>
-                        <Button variant='contained' color='primary'>Random Color</Button>
+                        
+                        <Button 
+                            variant='contained' 
+                            color='secondary' 
+                            onClick={ this.clearColors } 
+                        >
+                            Clear Palette
+                        </Button>
+                        
+                        <Button 
+                            variant='contained' 
+                            color='primary'
+                            onClick={ this.addRandomColor }
+                            disabled={paletteIsFull}
+                        >
+                            { paletteIsFull ? 'Palette Full' : 'Random Color'}
+                        </Button>
                     </div>
                     <ChromePicker 
                         color={currentColor}
@@ -250,9 +285,10 @@ class NewPaletteForm extends Component {
                             variant='contained'
                             type='submit'
                             color='primary'
-                            style={{ backgroundColor: currentColor }}
+                            style={{ backgroundColor: paletteIsFull ? 'gray' : currentColor }}
+                            disabled={ paletteIsFull }
                         >
-                            Add Color
+                            { paletteIsFull ? 'Palette Full' : 'Add Color' }
                         </Button>
                     </ValidatorForm>
                 </Drawer>
@@ -263,7 +299,7 @@ class NewPaletteForm extends Component {
                 >
                     <div className={classes.drawerHeader} />
                     <DraggableColorList 
-                        colors={ this.state.colors } 
+                        colors={ colors } 
                         removeColor={ this.removeColor }
                         axis='xy'
                         onSortEnd={this.onSortEnd}
