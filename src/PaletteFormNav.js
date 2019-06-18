@@ -109,7 +109,7 @@ class PaletteFormNav extends Component {
                                 type='submit'
                             >
                                 Save Palette
-                                </Button>
+                            </Button>
                         </ValidatorForm>
                         <Link to='/'>
                             <Button variant='contained' color='secondary'>
@@ -117,7 +117,7 @@ class PaletteFormNav extends Component {
                                 </Button>
                         </Link>
                     </div>
-                    
+
                 </AppBar>
             </div>
         )
