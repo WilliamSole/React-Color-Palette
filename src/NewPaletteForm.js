@@ -87,7 +87,7 @@ class NewPaletteForm extends Component {
         this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
         this.addNewColor = this.addNewColor.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.handleSumbit = this.handleSumbit.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.removeColor = this.removeColor.bind(this);
         this.clearColors = this.clearColors.bind(this);
         this.addRandomColor = this.addRandomColor.bind(this);
@@ -109,7 +109,7 @@ class NewPaletteForm extends Component {
         this.setState({ [e.target.name]: e.target.value })
     }
 
-    handleSumbit(newPaletteName) {
+    handleSubmit(newPaletteName) {
         const newPalette = { 
             id: newPaletteName.toLowerCase().replace(/ /g,'-'),
             paletteName: newPaletteName, 
@@ -155,7 +155,7 @@ class NewPaletteForm extends Component {
                 <PaletteFormNav 
                     open={open} 
                     palettes={palettes} 
-                    handleSumbit={ this.handleSumbit }
+                    handleSubmit={ this.handleSubmit }
                     handleDrawerOpen={ this.handleDrawerOpen } 
                 />
                 <Drawer
