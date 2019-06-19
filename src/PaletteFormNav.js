@@ -50,7 +50,7 @@ const styles = theme => ({
     button: {
         margin: '0 0.5rem'
     }
-})
+});
 
 class PaletteFormNav extends Component {
     constructor(props) {
@@ -61,15 +61,20 @@ class PaletteFormNav extends Component {
         }
 
         this.showForm = this.showForm.bind(this);
+        this.hideForm = this.hideForm.bind(this);
     }
 
     showForm() {
         this.setState({ formShowing: true });
     }
 
+    hideForm() {
+        this.setState({ formShowing: false });
+    }
+
     render() {
         const { classes, open, palettes, handleSubmit } = this.props;
-        const { newPaletteName } = this.state;
+        const { formShowing } = this.state;
         return (
             <div className={classes.root}>
                 <CssBaseline />
@@ -101,14 +106,14 @@ class PaletteFormNav extends Component {
                                 Go Back
                             </Button>
                         </Link>
-                        <Button variant="contained" color="primary" onClick={this.showForm} className={classes.button}>
+                        <Button variant="contained" color="primary" onClick={this.showForm} className={classes.button} >
                             Save New Palette
                         </Button>
                     </div>
                 </AppBar>
-                {this.state.formShowing && (
-                    <PaletteMetaForm palettes={palettes} handleSubmit={handleSubmit} />
-                )}
+                {formShowing && 
+                    <PaletteMetaForm palettes={palettes} handleSubmit={handleSubmit} hideForm={this.hideForm} />
+                }
             </div>
         )
     }
