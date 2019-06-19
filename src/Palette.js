@@ -29,27 +29,27 @@ class Palette extends Component {
         const { colors, paletteName, emoji, id } = this.props.palette;
         const { level, format } = this.state;
         const colourBoxes = colors[level].map(c => {
-            return <ColourBox 
-                        key={ c.id } 
-                        id={ c.id } 
-                        background={ c[format] } 
-                        name={ c.name } 
-                        paletteId={id} 
-                        showFullPalette={ true }
-                    />
+            return <ColourBox
+                key={c.id}
+                id={c.id}
+                background={c[format]}
+                name={c.name}
+                paletteId={id}
+                showFullPalette={true}
+            />
         })
-        return(
-            <div className={ classes.Palette }>
-                <NavBar 
-                    level={ level } 
-                    changeLevel={ this.changeLevel } 
-                    handleChange={ this.changeColorFormat }
-                    showingAllColors={ true }
+        return (
+            <div className={classes.Palette}>
+                <NavBar
+                    level={level}
+                    changeLevel={this.changeLevel}
+                    handleChange={this.changeColorFormat}
+                    showingAllColors={true}
                 />
-                <div className={ classes.colors }>
+                <div className={classes.colors}>
                     {colourBoxes}
                 </div>
-                <PaletteFooter paletteName={ paletteName } emoji={ emoji } />
+                <PaletteFooter paletteName={paletteName} emoji={emoji} />
             </div>
         )
     }
