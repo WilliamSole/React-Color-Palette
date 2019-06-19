@@ -66,7 +66,7 @@ class PaletteList extends Component {
                                     key={palette.id} 
                                     id={palette.id} 
                                     {...palette} 
-                                    handleClick={() => this.gotToPalette(palette.id)} 
+                                    gotToPalette={this.gotToPalette} 
                                     openDialog={this.openDialog} 
                                 />
                             </CSSTransition>
