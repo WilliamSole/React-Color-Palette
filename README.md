@@ -3,8 +3,6 @@ The Colour Palette App uses React for the front-end and makes use of Hooks, Cont
 
 ## Built Using
 * React
-* React Hooks
-* Context API
 * React Router
 * Material UI
 * Chroma JS
