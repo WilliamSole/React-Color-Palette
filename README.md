@@ -11,6 +11,5 @@ The Colour Palette App uses React for the front-end and makes use of Hooks, Cont
 * React Color
 * React Copy To Clipboard
 * React Material UI Form Validator
-* React Scripts
 * React Sortable HOC
 * React Transition Group
